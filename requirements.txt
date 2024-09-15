@@ -1,0 +1,5 @@
+aiogram
+sqlalchemy[asyncio]
+asyncpg
+miniopy-async
+apscheduler
