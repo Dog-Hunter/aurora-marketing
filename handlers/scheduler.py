@@ -22,8 +22,11 @@ async def get_data_for_message():
         for i in a:
             task = await session.execute(select(database.Task).where(database.Task.id == i[0].task_id))
             b = task.fetchone()
-            ph = './tmp/' + b[0].photo + '.jpg'
-            await send_message(b[0].chat_id, b[0].text, ph)
+            if b[0].photo is None:
+                await send_message(b[0].chat_id, b[0].text)
+            else:
+                ph = './tmp/' + b[0].photo + '.jpg'
+                await send_message(b[0].chat_id, b[0].text, ph)
 
 
 async def send_message(chat_id, text='', photo=None):
