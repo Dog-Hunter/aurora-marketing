@@ -25,8 +25,10 @@ async def get_file(bot: Bot, photo: PhotoSize):
             os.makedirs('./tmp')
     
     await bot.download_file(file_path, f'./tmp/{file_name}')
-
-    await client.fput_object(
-          'aurora-market', file_name, f'./tmp/{file_name}')
+    try:
+        await client.fput_object(
+            'aurora-market', file_name, f'./tmp/{file_name}')
+    except Exception as e:
+        print(e)
     
     # os.remove(f'./tmp/{file_name}')
